@@ -4,8 +4,8 @@ import unib from './unib.png';
 const Heading = () => {
 	return (
 		<h1
-			style={{ fontSize: '70px' }}
-			className='m-4 p-2'>
+			style={{ fontSize: '50px' }}
+			className='m-2 p-1'>
 			<img
 				src={unib}
 				alt='nicorni'

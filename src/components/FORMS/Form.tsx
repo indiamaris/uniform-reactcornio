@@ -2,10 +2,16 @@
 // import React, { FormEvent, useRef, useState } from 'react';
 import React, { FormEvent } from 'react';
 import './form.css';
-import { FieldValue, useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
+
 function Form() {
-	const { register, handleSubmit } = useForm();
-	
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm();
+
+	const onSubmit = (data: FieldValues) => console.log(data);
 
 	// const emailRef = useRef<HTMLInputElement>(null);
 	// const pwdRef = useRef<HTMLInputElement>(null);
@@ -27,39 +33,54 @@ function Form() {
 	// };
 
 	return (
-		<>
-			<form
-				onSubmit={handleSubmit(({ data: FieldValues }) =>
-					console.log(data)
-				)}>
-				<div className='container card p-5 d-flexflex-column m-4 align-content-center text-center'>
-					<div className='form-group text-center m-4'>
-						{/* email formularindia */}
-						<div className='email m-2'>
-							<label htmlFor='EmailLabel'>
-								Your mail address @gmaris
-							</label>
+		<form onSubmit={handleSubmit(onSubmit)}>
+			<div className='container card p-5 d-flexflex-column m-4 align-content-center text-center'>
 
-							<input
-								{...register('emailInput', {
-									required: true,
-									minLength: 3,
-								})}
-								// onChange={(e) =>
-								// 	setPersonalData({
-								// 		...personalData,
-								// 		email: e.target.value,
-								// 	})}
-								// 		value={personalData.email}
-								// ref={emailRef}
-								type='email'
-								className='form-control text-center m-2'
-								id='InputEmail'
-								aria-describedby='emailHelp'
-								placeholder='Enter your indiamail'>
-								{<p>The email is required</p>}
-								</input>
-						</div>
+					<div className='name mb-4'>
+						<label htmlFor='NameLabel'>Your mail name here</label>
+						<input
+							{...register('name', {
+								required: true,
+								minLength: 3,
+							})}
+							id='inputName'
+							type='name'
+							className='form-control text-center m-2'
+							aria-describedby='namelHelp'
+							placeholder='Enter your namindy'
+						/>
+
+						{errors.name?.type === 'required' && (
+							<p>The name is required</p>
+						)}
+						{errors.name?.type === 'minLength' && (
+							<div>
+								<p>The name is too short</p>
+								<small
+									id='nameHelp'
+									style={{ fontSize: '12px' }}>
+									If this is your real name,please ask your
+									mother to change it!
+								</small>
+							</div>
+						)}
+					</div>
+
+					<div className='email mb-4'>
+						<label htmlFor='EmailLabel'>
+							Your mail address @gmaris
+						</label>
+						<input
+							{...register('inputEmail', {
+								required: true,
+								minLength: 3,
+							})}
+							id='inputEmail'
+							type='email'
+							className='form-control text-center m-2'
+							aria-describedby='emailHelp'
+							placeholder='Enter your indiamail'
+						/>
 
 						<small
 							id='emailHelp'
@@ -67,52 +88,71 @@ function Form() {
 							We'll promise we never share your email with anyone
 							else.
 						</small>
+					</div>
 
-						<div className='senha m-2'>
-							{/* aqui o cmapo da  senhax */}
-							<label htmlFor='PasswordLabel'>Password</label>
-							<input
-								// onChange={(e) =>
-								// 	setPersonalData({
-								// 		...personalData,
-								// 		pwd: e.target.value,
-								// 	})
-								// }
-								// value={personalData.pwd}
-								// ref={pwdRef}
-								{...register('pwd')}
-								type='password'
-								className='form-control  text-center m-2'
-								id='inputPassword'
-								placeholder='Password'></input>
-							{/* ate aqui senha */}
-						</div>
+					<div className='senha m-2'>
+						{/* aqui o cmapo da  senhax */}
+						<label htmlFor='PasswordLabel'>Password</label>
+						<input
+							// onChange={(e) =>
+							// 	setPersonalData({
+							// 		...personalData,
+							// 		pwd: e.target.value,
+							// 	})
+							// }
+							// value={personalData.pwd}
+							// ref={pwdRef}
+							{...register('pwd')}
+							type='password'
+							className='form-control  text-center m-2'
+							id='inputPassword'
+							placeholder='Password'
+						/>
+					</div>
 
-						{/* Check me out */}
+					<div className='checkbox'>
 						<input
 							type='checkbox'
 							className='form-check-input m-1'
-							id='exampleCheck1'></input>
+							id='exampleCheck1'
+						/>
 
 						<label
 							className='form-check-label'
 							htmlFor='exampleCheck1'>
 							Check me out
 						</label>
-						{/* Check me out */}
 					</div>
 
-					<button
-						m-2
-						type='submit'
-						className='btn btn-outline-primary m-5 p-2'>
-						SUBMIT
-					</button>
+					<div className='btnx'>
+						<button
+							type='submit'
+							className='btn btn-outline-primary m-4 p-2 w-25'>
+							SUBMIT
+						</button>
+					</div>
 				</div>
-			</form>
-		</>
+
+		</form>
 	);
 }
 
 export default Form;
+
+// {console.log(errors)}
+// onChange={(e) =>
+// 	setPersonalData({
+// 		...personalData,
+// 		email: e.target.value,
+// 	})}
+// 		value={personalData.email}
+
+// ref={emailRef}
+
+
+
+
+
+
+
 
