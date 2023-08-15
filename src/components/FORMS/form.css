@@ -1,0 +1,33 @@
+/** @format */
+
+* {
+	background-color: black;
+	color: pink;
+}
+h1 {
+	color: rgb(242, 2, 170);
+}
+
+.container {
+	background-color: black;
+	color: pink;
+}
+#emailHelp {
+	color: rgb(173, 116, 126);
+}
+
+.btn-outline-primary{
+	background-color: rgb(242, 2, 170);
+	color: aliceblue;
+}
+
+#exampleInputEmail1{
+		background-color: rgb(244, 205, 211);
+		color: black;
+}
+
+#exampleInputPassword1{
+		background-color: rgb(244, 205, 211);
+}
+
+
